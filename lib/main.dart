@@ -34,20 +34,112 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: Colors.orange,
       // appBar: AppBar(),
       // body: Text('muhammed akbar ali'),
       body: SafeArea(
-        child: Center(
-          child: Text(
-            'Akbar Ali', 
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              flex: 2,
+                child: Container(
+                  color: Colors.yellow,
+                  // width: double.infinity,
+                  // height: double.infinity,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+
+                  children: [
+                    const Text(
+                      'Akbar Ali', 
+                      // textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        TextButton(onPressed: (){
+                            print("Text Button Clicked");
+                          }, child: const Text("Click Me")
+                        ),
+                        IconButton(onPressed: (){
+
+                          }, icon: const Icon(Icons.mic)
+                        ),
+                      ],
+                    ),
+                    ElevatedButton(onPressed: (){
+                        print("Elevated Button Clicked");
+                      }, child: const Text('Click Me')
+                    ),
+                  ],
+                ),
+              ),
             ),
-          ),
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: Colors.blue, width: 10),
+                ),
+                child: Center(
+                  child: Text(
+                    "welcome"
+                  ),
+                ),
+              )
+            ),
+            Expanded(
+                          child: Container(
+                color: Colors.red,
+                // width: double.infinity,
+                // height: double.infinity,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+
+                  children: [
+                    const Text(
+                      'Akbar Ali', 
+                      // textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        TextButton(onPressed: (){
+                            print("Text Button Clicked");
+                          }, child: const Text("Click Me")
+                        ),
+                        IconButton(onPressed: (){
+
+                          }, icon: const Icon(Icons.mic)
+                        ),
+                      ],
+                    ),
+                    ElevatedButton(onPressed: (){
+                        print("Elevated Button Clicked");
+                      }, child: const Text('Click Me'),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
