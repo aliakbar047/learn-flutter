@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sample_project/whatsapp_ui.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.red, 
       ),
-      home: HomeScreen(),
+      home: FormScreen(),
       // home: Scaffold(
       //   appBar: AppBar(
       //     title:Text(
@@ -28,15 +30,15 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomeScreen extends StatefulWidget {
+class FormScreen extends StatefulWidget {
 
-  HomeScreen({ Key? key}) : super(key: key);
+  FormScreen({ Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<FormScreen> createState() => _FormScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _FormScreenState extends State<FormScreen> {
 
   final _textController = TextEditingController();
 
@@ -44,6 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    getSavedData(context);
     return Scaffold(
       backgroundColor: Colors.orange,
       // appBar: AppBar(),
@@ -62,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 TextField(
                   controller: _textController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Type something',
                   ),
@@ -70,10 +73,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 ElevatedButton(
                   onPressed: (){
                     // Get Data
-                    print(_textController.text);
-                    setState(() {
-                      _dsiplayText = _textController.text;
-                    });
+                    // print(_textController.text);
+                    // setState(() {
+                    //   _dsiplayText = _textController.text;
+                    // });
+                    saveDataStorage();
                   }, 
                   child: Text('Click Here'),),
                 Text(_dsiplayText),
@@ -83,5 +87,26 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> saveDataStorage() async{
+    print(_textController.text);
+
+    final sharedPrefs = await SharedPreferences.getInstance();
+
+    await sharedPrefs.setString('saved_value', _textController.text);
+  }
+
+  Future<void> getSavedData( BuildContext context) async{
+    final sharedPrefs = await SharedPreferences.getInstance();
+
+    final savedValue = sharedPrefs.getString('saved_value');
+
+    if(savedValue != null){
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (ctx) => WhatsappUiScreen())
+      );
+    }
+
   }
 }

@@ -4,6 +4,11 @@ import 'package:flutter/material.dart';
 
 
 class HomeScreen extends StatefulWidget {
+
+  final String name;
+
+  const HomeScreen({Key? key, required this.name}) : super(key: key);
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -15,8 +20,16 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text(_counter.toString(),),
+      appBar: AppBar(
+        title: Text(widget.name),
+      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Text(_counter.toString(),),
+            Text(widget.name),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
